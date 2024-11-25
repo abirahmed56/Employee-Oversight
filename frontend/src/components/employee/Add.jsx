@@ -205,7 +205,7 @@ const Add = () => {
                     </div>
 
                     {/* Upload Image */}
-                    <div className="md:col-span-2">
+                    <div>
                         <label className="block text-sm font-medium text-gray-700">Upload Image</label>
                         <input
                             type="file"
