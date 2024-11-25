@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { EmployeeButtons, columns } from '../../utils/EmployeeHelper'
+import DataTable from 'react-data-table-component'
+import axios from 'axios'
+
+DataTable
 
 const List = () => {
     const [employees, setEmployees] = useState([])
@@ -22,13 +27,12 @@ const List = () => {
                   sno: sno++,
                   dept_name: emp.department.dept_name,
                   name: emp.userId.name,
-                  dob: emp.dob,
-                  profileImage: emp.userId.profileImage,
-                  action: <DepartmentButtons Id={dept._id} onDepartmentDelete={onDepartmentDelete}/>,
+                  dob: new Date(emp.dob).toLocaleDateString(),
+                  profileImage: <img width={40} className='rounded-full' src={`http://localhost:5000/${emp.userId.profileImage}`}/>,
+                  action: (<EmployeeButtons Id={emp._id}/>),
                 }
               ));
-              setDepartments(data);
-              setFilteredDepartments(data);
+              setEmployees(data);
             }
           } catch (error) {
             if (error.response && !error.response.data.success) {
@@ -63,6 +67,9 @@ const List = () => {
                 >
                     Add New Employee
                 </Link>
+            </div>
+            <div>
+                <DataTable columns={columns} data={employees}/>
             </div>
         </div>
     )
