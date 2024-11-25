@@ -15,8 +15,10 @@ const verifyUser = async(req, res, next) =>{
             return res.status(404).json({success: false, error: "User Not Found"})
         }
         req.user = user
+        console.log("Testing in varify user....")
         next()
     } catch (error) {
+        console.log("catched in verify user", error)
         return res.status(500).json({success: false, error: "server error"})
     }
 }

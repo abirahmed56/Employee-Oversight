@@ -90,12 +90,11 @@ const getEmployee = async (req, res) =>{
 const updateEmployee = async (req, res) => {
     try {
         const {id} = req.params;
-        console.log(req.body)
         const {
             name, 
             maritalStatus,
             designation,
-            department,
+            departmentId,
             salary,
         } = req.body;
         const employee = await Employee.findById({_id: id})
@@ -111,13 +110,14 @@ const updateEmployee = async (req, res) => {
             maritalStatus,
             designation,
             salary,
-            department
+            departmentId
         })
         if(!updateEmployee || !updateUser){
             return res.status(404).json({success: false, error: "Document Not Found"})
         }
-        return res.status(200).json({success:true, message: "employee updated"})
+        return res.status(200).json({success:true, updateEmployee, message: "employee updated"})
     } catch (error) {
+        console.log(error)
         return res.status(500).json({success: false, error: "update employee server error"})
     }
 }
