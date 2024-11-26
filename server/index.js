@@ -3,6 +3,7 @@ import cors from 'cors';
 import authRouter from './routes/auth.js';
 import departmentRouter from './routes/department.js';
 import employeeRouter from './routes/employee.js';
+import salaryRouter from './routes/salary.js'
 import connectToDatabase from './db/db.js';
 import morgan from 'morgan';
 import path from 'path';
@@ -19,6 +20,7 @@ app.use(express.static(path.join(process.cwd(), 'public', 'uploads')));
 app.use('/api/auth', authRouter);
 app.use('/api/department', departmentRouter);
 app.use('/api/employee', employeeRouter);
+app.use('/api/salary', salaryRouter)
 
 const notFound = (req, res, next) => {
   res.status(404).json({ error: 'Invalid API route' });

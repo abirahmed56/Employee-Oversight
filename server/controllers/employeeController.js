@@ -5,22 +5,22 @@ import bcrypt from 'bcrypt'
 import path from "path";
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb)=>{
+    destination: (req, file, cb) => {
         cb(null, "public/uploads")
     },
 
-    filename: (req, file, cb) =>{
+    filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
     }
-    
+
 })
 
-const upload = multer({storage: storage})
+const upload = multer({ storage: storage })
 
 const addEmployee = async (req, res) => {
     try {
         const {
-            name, 
+            name,
             email,
             employeeId,
             dob,
@@ -33,9 +33,9 @@ const addEmployee = async (req, res) => {
             role
         } = req.body;
 
-        const user = await User.findOne({email})
-        if (user){
-            return res.status(400).json({success: false, error: "user already resistered in employee"})
+        const user = await User.findOne({ email })
+        if (user) {
+            return res.status(400).json({ success: false, error: "user already resistered in employee" })
         }
 
         const hashPassword = await bcrypt.hash(password, 10)
@@ -45,7 +45,7 @@ const addEmployee = async (req, res) => {
             email,
             password: hashPassword,
             role,
-            profileImage: req.file? req.file.filename: ""
+            profileImage: req.file ? req.file.filename : ""
         })
         const savedUser = await newUser.save()
 
@@ -61,65 +61,78 @@ const addEmployee = async (req, res) => {
         })
 
         await newEmployee.save()
-        return res.status(200).json({success:true, message: "employee created"})
+        return res.status(200).json({ success: true, message: "employee created" })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({success: false, error: "server error in ading employee"})
+        return res.status(500).json({ success: false, error: "server error in ading employee" })
     }
 }
 
-const getEmployees = async (req, res) =>{
+const getEmployees = async (req, res) => {
     try {
-        const employees = await Employee.find().populate('userId', {password: 0}).populate("department")
-        return res.status(200).json({success:true, employees})
+        const employees = await Employee.find().populate('userId', { password: 0 }).populate("department")
+        return res.status(200).json({ success: true, employees })
     } catch (error) {
-        return res.status(500).json({success: false, error: "get employees server error"})
+        return res.status(500).json({ success: false, error: "get employees server error" })
     }
 }
 
-const getEmployee = async (req, res) =>{
-    const {id} = req.params;
+const getEmployee = async (req, res) => {
+    const { id } = req.params;
     try {
-        const employee = await Employee.findById({_id: id}).populate('userId', {password: 0}).populate("department")
-        return res.status(200).json({success:true, employee})
+        const employee = await Employee.findById({ _id: id }).populate('userId', { password: 0 }).populate("department")
+        return res.status(200).json({ success: true, employee })
     } catch (error) {
-        return res.status(500).json({success: false, error: "get employee server error"})
+        return res.status(500).json({ success: false, error: "get employee server error" })
     }
 }
 
 const updateEmployee = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const {
-            name, 
+            name,
             maritalStatus,
             designation,
             departmentId,
             salary,
         } = req.body;
-        const employee = await Employee.findById({_id: id})
-        if(!employee){
-            return res.status(404).json({success: false, error: "Employee Not Found"})
+        const employee = await Employee.findById({ _id: id })
+        if (!employee) {
+            return res.status(404).json({ success: false, error: "Employee Not Found" })
         }
-        const user = await User.findById({_id: employee.userId})
-        if(!user){
-            return res.status(404).json({success: false, error: "User Not Found"})
+        const user = await User.findById({ _id: employee.userId })
+        if (!user) {
+            return res.status(404).json({ success: false, error: "User Not Found" })
         }
-        const updateUser = await User.findByIdAndUpdate({_id: employee.userId}, {name})
-        const updateEmployee = await Employee.findByIdAndUpdate({_id: id},{
+        const updateUser = await User.findByIdAndUpdate({ _id: employee.userId }, { name })
+        const updateEmployee = await Employee.findByIdAndUpdate({ _id: id }, {
             maritalStatus,
             designation,
             salary,
             departmentId
         })
-        if(!updateEmployee || !updateUser){
-            return res.status(404).json({success: false, error: "Document Not Found"})
+        if (!updateEmployee || !updateUser) {
+            return res.status(404).json({ success: false, error: "Document Not Found" })
         }
-        return res.status(200).json({success:true, updateEmployee, message: "employee updated"})
+        return res.status(200).json({ success: true, updateEmployee, message: "employee updated" })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({success: false, error: "update employee server error"})
+        return res.status(500).json({ success: false, error: "update employee server error" })
     }
 }
 
-export {addEmployee, upload, getEmployees, getEmployee, updateEmployee};
+const fetchEmployeesByDeptId = async (req, res) => {
+    const { id } = req.params;
+    console.log(">>>>>")
+    try {
+        const employees = await Employee.find({ department: id })
+            .populate('userId', { password: 0 })
+            .populate("department")
+        return res.status(200).json({ success: true, employees })
+    } catch (error) {
+        return res.status(500).json({ success: false, error: "get employees by DeptId server error" })
+    }
+}
+
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeesByDeptId };

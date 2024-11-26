@@ -12,6 +12,8 @@ import List from './components/employee/List'
 import Add from './components/employee/Add'
 import View from './components/employee/View'
 import Edit from './components/employee/Edit'
+import AddSalary from './components/salary/AddSalary'
+import ViewSalary from './components/salary/ViewSalary'
 
 function App() {
 
@@ -36,6 +38,9 @@ function App() {
           <Route path='/admin-dashboard/add-employee' element={<Add />}></Route>
           <Route path='/admin-dashboard/employees/:id' element={<View />}></Route>
           <Route path='/admin-dashboard/edit-employees/:id' element={<Edit />}></Route>
+          <Route path='/admin-dashboard/employee-salary/:id' element={<ViewSalary />}></Route>
+
+          <Route path='/admin-dashboard/salary/add' element={<AddSalary />}></Route>
 
 
         </Route>
