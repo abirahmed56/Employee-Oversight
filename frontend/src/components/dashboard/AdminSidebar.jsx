@@ -56,7 +56,7 @@ function AdminSidebar() {
           <span>Salary</span>
         </NavLink>
         <NavLink 
-          to="/admin-settings" 
+          to="/admin-dashboard/settings" 
           className={({ isActive }) =>
             `flex items-center gap-4 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
           }
