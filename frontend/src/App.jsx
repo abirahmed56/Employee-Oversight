@@ -63,7 +63,7 @@ function App() {
           <Route path='/employee-dashboard/profile/:id' element={<View />}></Route>
           <Route path='/employee-dashboard/leaves' element={<LeaveList />}></Route>
           <Route path='/employee-dashboard/add-leave' element={<AddLeave />}></Route>
-          <Route path='/employee-dashboard/salary' element={<DepartmentList />}></Route>
+          <Route path='/employee-dashboard/salary/:id' element={<ViewSalary />}></Route>
           <Route path='/employee-dashboard/settings' element={<DepartmentList />}></Route>
         </Route>
       </Routes>
