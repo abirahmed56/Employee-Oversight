@@ -12,8 +12,8 @@ const departmentSchema = new mongoose.Schema({
 
 departmentSchema.pre("deleteOne", {document:true, query: false}, async function(next){
     try {
-        const employee = await Employee.find({department: this._id})
-        const empIds = employee.map(emp=> emp._d)
+        const employees = await Employee.find({department: this._id})
+        const empIds = employees.map(emp=> emp._id)
 
         await Employee.deleteMany({department: this._id})
         await Leave.deleteMany({employeeId: {$in: empIds}})
