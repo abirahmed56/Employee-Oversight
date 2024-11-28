@@ -64,7 +64,7 @@ const Details = () => {
               <div className="flex-shrink-0 w-full lg:w-1/3 flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md">
                 <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-800 shadow-lg">
                   <img
-                    src={`http://localhost:5000/uploads/${leave.employeeId.userId.profileImage}`}
+                    src={`http://localhost:5000/${leave.employeeId.userId.profileImage}`}
                     alt={leave.employeeId.userId.name}
                     className="w-full h-full object-cover"
                   />

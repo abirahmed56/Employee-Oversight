@@ -54,7 +54,7 @@ const getLeaves = async (req, res) => {
                 },
                 {
                     path:'userId',
-                    select: 'name'
+                    select: 'name',
                 }
             ]
         })
@@ -89,7 +89,7 @@ const getLeaveDetail = async (req, res) => {
                 },
                 {
                     path: "userId",
-                    select: "neme profileImage"
+                    select: "name profileImage"
                 }
             ]
         })
