@@ -7,7 +7,6 @@ const verifyUser = async(req, res, next) =>{
             return res.status(404).json({success: false, error: "Token Not Provided"})
         }
         const decoded = jwt.verify(token, process.env.JWT_KEY)
-        console.log(decoded)
         if(!decoded){
             return res.status(404).json({success: false, error: "Token Not Valid"})
         }
@@ -18,10 +17,8 @@ const verifyUser = async(req, res, next) =>{
         req.user = user
         req.userId = decoded._id
         req.role = decoded.role
-        console.log("Testing in varify user....")
         next()
     } catch (error) {
-        console.log("catched in verify user", error)
         return res.status(500).json({success: false, error: "server error"})
     }
 }

@@ -27,7 +27,7 @@ const getSummary = async (req, res) =>{
             success: true,
             totalEmployee,
             totalDepartment,
-            totalSalary: totalSalaries[0]?.totalSalary || 0,
+            totalSalary: totalSalaries[0]?.totalSalary || 100,
             leaveSummary
         })
     } catch (error) {
