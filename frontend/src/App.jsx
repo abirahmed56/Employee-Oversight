@@ -18,6 +18,8 @@ import SummaryCard from './components/EmployeeDashboard/Summary'
 import LeaveList from './components/leave/List'
 import AddLeave from './components/leave/Add'
 import Settings from './components/EmployeeDashboard/Settings'
+import Table from './components/leave/Table'
+import Details from './components/leave/Details'
 
 function App() {
 
@@ -42,9 +44,14 @@ function App() {
           <Route path='/admin-dashboard/add-employee' element={<Add />}></Route>
           <Route path='/admin-dashboard/employees/:id' element={<View />}></Route>
           <Route path='/admin-dashboard/edit-employees/:id' element={<Edit />}></Route>
-          <Route path='/admin-dashboard/employee-salary/:id' element={<ViewSalary />}></Route>
+         
           <Route path='/admin-dashboard/settings' element={<Settings />}></Route>
 
+          <Route path='/admin-dashboard/employee-leaves/:id' element={<LeaveList />}></Route>
+          <Route path='/admin-dashboard/leaves' element={<Table />}></Route>
+          <Route path='/admin-dashboard/leaves/:id' element={<Details />}></Route>
+
+          <Route path='/admin-dashboard/employee-salary/:id' element={<ViewSalary />}></Route>
           <Route path='/admin-dashboard/salary/add' element={<AddSalary />}></Route>
 
 
@@ -63,7 +70,7 @@ function App() {
           <Route index element={<SummaryCard/>}></Route>
 
           <Route path='/employee-dashboard/profile/:id' element={<View />}></Route>
-          <Route path='/employee-dashboard/leaves' element={<LeaveList />}></Route>
+          <Route path='/employee-dashboard/leaves/:id' element={<LeaveList />}></Route>
           <Route path='/employee-dashboard/add-leave' element={<AddLeave />}></Route>
           <Route path='/employee-dashboard/salary/:id' element={<ViewSalary />}></Route>
           <Route path='/employee-dashboard/settings' element={<Settings />}></Route>

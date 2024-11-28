@@ -38,7 +38,7 @@ function AdminSidebar() {
           <span>Department</span>
         </NavLink>
         <NavLink 
-          to="/admin-leave" 
+          to="/admin-dashboard/leaves" 
           className={({ isActive }) =>
             `flex items-center gap-4 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
           }

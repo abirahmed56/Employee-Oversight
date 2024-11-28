@@ -28,19 +28,19 @@ app.use('/api/leave', leaveRouter)
 app.use('/api/setting', settingRouter)
 app.use('/api/dashboard', dashboardRouter)
 
-const notFound = (req, res, next) => {
-  res.status(404).json({ error: 'Invalid API route' });
-};
-app.use(notFound);
+// const notFound = (req, res, next) => {
+//   res.status(404).json({ error: 'Invalid API route' });
+// };
+// app.use(notFound);
 
-const errorHandler = (err, req, res, next) => {
-  console.error('Error: ', err);
-  const statusCode = err.statusCode || 500;
-  const message = err.message || 'Internal Server Error';
-  res.status(statusCode).json({ error: message });
-};
+// const errorHandler = (err, req, res, next) => {
+//   console.error('Error: ', err);
+//   const statusCode = err.statusCode || 500;
+//   const message = err.message || 'Internal Server Error';
+//   res.status(statusCode).json({ error: message });
+// };
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
