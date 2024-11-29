@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useAuth } from '../../context/authContext';
 import axios from 'axios';
 const List = () => {
     const {id} = useParams()
