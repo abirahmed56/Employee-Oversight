@@ -15,7 +15,6 @@ A modern employee management system built with React (frontend) and Express.js (
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 - [Contributors](#contributors)
-- [License](#license)
 
 ---
 
